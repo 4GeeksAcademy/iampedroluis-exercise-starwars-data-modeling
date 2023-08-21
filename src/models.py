@@ -17,6 +17,21 @@ from eralchemy2 import render_er
 Base = declarative_base()
 
 
+class User(Base):
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key = True)
+    username = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False)
+    password = Column(String(250), nullable=False)    
+    favorites = relationship('Favorites', backref='user', lazy=True) 
+
+class Favorites(Base):
+    __tablename__ = 'favorites'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))  
+    personaje_id = Column(Integer, ForeignKey('personaje.id')) 
+    planeta_id = Column(Integer, ForeignKey('planetas.id'))  
+
 
 class Personaje(Base):
     __tablename__ = 'personaje'
@@ -47,7 +62,7 @@ class Planetas(Base):
     terrain = Column(String(250), nullable=False)
     surface_water = Column(String(250), nullable=False)   
     description = Column(String(250), nullable=False)
-    habitantes  = relationship('Planetas', backref='user', lazy=True)
+    habitantes  = relationship('Personaje', backref='planeta', lazy=True)
 
      
 
