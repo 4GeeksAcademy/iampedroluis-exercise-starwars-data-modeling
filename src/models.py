@@ -31,6 +31,7 @@ class Favorites(Base):
     user_id = Column(Integer, ForeignKey('user.id'))  
     personaje_id = Column(Integer, ForeignKey('personaje.id')) 
     planeta_id = Column(Integer, ForeignKey('planetas.id'))  
+    vehiculo_id = Column(Integer, ForeignKey('vehiculos.id'))
 
 
 class Personaje(Base):
@@ -64,7 +65,23 @@ class Planetas(Base):
     description = Column(String(250), nullable=False)
     habitantes  = relationship('Personaje', backref='planeta', lazy=True)
 
-     
+class Vehiculos(Base):
+    __tablename__ = 'vehiculos'
+    id = Column(Integer, primary_key=True)  
+    model = Column(String(250), nullable=False)
+    starship_class = Column(String(250), nullable=False)
+    manufacturer = Column(String(250), nullable=False)
+    cost_in_credits = Column(String(250), nullable=False)
+    length = Column(String(250), nullable=False)
+    crew = Column(String(250), nullable=False)
+    passengers = Column(String(250), nullable=False)
+    max_atmosphering_speed = Column(String(250), nullable=False)
+    hyperdrive_rating = Column(String(250), nullable=False)
+    MGLT = Column(String(250), nullable=False)
+    cargo_capacity = Column(String(250), nullable=False)
+    consumables = Column(String(250), nullable=False)
+    name = Column(String(250), nullable=False)
+    description = Column(String(250), nullable=False)
 
     
  
